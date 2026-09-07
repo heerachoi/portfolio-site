@@ -27,9 +27,10 @@ export default function About() {
         <FadeIn>
           <h2 className="about__title">소개</h2>
           <p className="about__body">
-            디자인과 개발을 함께 다루는 웹 개발자입니다. SWIVEE·POPCORN 등 팀
-            프로젝트에서 프론트엔드를 담당했고, 바닐라 JavaScript SPA부터 React
-            앱까지 다양한 스택으로 웹 서비스를 구현했습니다.
+            디자인과 개발을 함께 다루는 웹 개발자입니다. NoteSquare에서 KOTI
+            자율주행 시범운행지구 평가 시스템 프론트엔드를 담당했고, SWIVEE·POPCORN
+            등 팀 프로젝트부터 바닐라 JavaScript SPA·React 앱까지 웹 서비스를
+            구현해 왔습니다.
           </p>
           <p className="about__body">
             백준·LeetCode 문제 풀이로 알고리즘 기초를 꾸준히 다지고, GitHub로
