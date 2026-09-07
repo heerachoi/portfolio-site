@@ -1,0 +1,19 @@
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 0 40px;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+
+.footer__top {
+  transition: color 0.2s ease;
+}
+
+.footer__top:hover {
+  color: var(--ink);
+}

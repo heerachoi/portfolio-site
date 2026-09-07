@@ -1,0 +1,125 @@
+.blog {
+  border-top: 1px solid var(--line);
+}
+
+.blog__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 100%;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+}
+
+.blog__title {
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  margin-bottom: 14px;
+}
+
+.blog__sub {
+  font-size: 1rem;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.blog__all {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--brass);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.blog__all:hover {
+  border-color: var(--brass);
+}
+
+.blog__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.blog__item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 28px;
+  align-items: start;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.25s ease;
+}
+
+.blog__item:hover .blog__item-title {
+  color: var(--brass);
+}
+
+.blog__item:hover .blog__arrow {
+  transform: translateX(4px);
+  color: var(--brass);
+}
+
+.blog__date {
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  padding-top: 6px;
+}
+
+.blog__content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.blog__item-title {
+  font-size: clamp(1.05rem, 2vw, 1.22rem);
+  line-height: 1.4;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+
+.blog__excerpt {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-dim);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog__arrow {
+  font-size: 1.1rem;
+  color: var(--ink-faint);
+  padding-top: 4px;
+  transition: transform 0.25s ease, color 0.2s ease;
+}
+
+@media (max-width: 720px) {
+  .blog__item {
+    grid-template-columns: 1fr auto;
+    gap: 12px 16px;
+  }
+
+  .blog__date {
+    grid-column: 1 / -1;
+    padding-top: 0;
+  }
+
+  .blog__content {
+    grid-column: 1;
+  }
+
+  .blog__arrow {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
