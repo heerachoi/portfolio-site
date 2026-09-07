@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { blogUrl, posts } from "../data/posts";
+import { easeOut } from "../motion";
+import FadeIn from "./FadeIn";
 import "./Blog.css";
 
 function formatDate(iso) {
@@ -12,13 +14,7 @@ export default function Blog() {
   return (
     <section id="blog" className="blog section">
       <div className="container">
-        <motion.div
-          className="blog__head"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <FadeIn className="blog__head">
           <div>
             <h2 className="blog__title">글</h2>
             <p className="blog__sub">
@@ -35,19 +31,19 @@ export default function Blog() {
           >
             블로그 전체 보기
           </motion.a>
-        </motion.div>
+        </FadeIn>
 
         <ul className="blog__list">
           {posts.map((post, i) => (
-            <motion.li
+            <FadeIn
               key={post.link}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              as="li"
+              delay={Math.min(i * 0.05, 0.3)}
               viewport={{ once: true, margin: "-40px" }}
               transition={{
                 duration: 0.45,
                 delay: Math.min(i * 0.05, 0.3),
-                ease: [0.22, 1, 0.36, 1],
+                ease: easeOut,
               }}
             >
               <a
@@ -67,7 +63,7 @@ export default function Blog() {
                   →
                 </span>
               </a>
-            </motion.li>
+            </FadeIn>
           ))}
         </ul>
       </div>

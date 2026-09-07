@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { site } from "../data/site";
+import { easeOut } from "../motion";
 import "./Hero.css";
 
 const container = {
@@ -10,7 +12,11 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: easeOut },
+  },
 };
 
 export default function Hero() {
@@ -27,14 +33,14 @@ export default function Hero() {
             <br />
             코드로 구현하는
             <br />
-            웹 개발자 최희라
+            웹 개발자 {site.name}
           </motion.h1>
 
           <motion.p variants={item} className="hero__lede">
-            HTML·CSS·JavaScript로 웹의 기반을 다지고, React와 TypeScript로
-            인터랙티브한 앱을 만들었습니다. Illustrator·Adobe XD로 사용자 경험을
-            먼저 그리고, Firebase와 Vercel로 실서비스까지 연결하는 프로젝트를
-            팀과 함께 진행해왔습니다.
+            HTML·CSS·JavaScript로 웹의 기반을 다지고, React로 인터랙티브한 앱을
+            만들었습니다. Illustrator·Adobe XD로 사용자 경험을 먼저 그리고,
+            Firebase와 Vercel로 실서비스까지 연결하는 프로젝트를 팀과 함께
+            진행해왔습니다.
           </motion.p>
 
           <motion.div variants={item} className="hero__actions">
@@ -42,7 +48,7 @@ export default function Hero() {
               작업 살펴보기
             </a>
             <a
-              href="https://github.com/heerachoi"
+              href={site.github.href}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn--ghost"

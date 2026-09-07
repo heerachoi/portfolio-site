@@ -1,10 +1,5 @@
-.pcard--link {
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-}
-
 .pcard {
+  position: relative;
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 28px;
@@ -17,6 +12,18 @@
 
 .pcard:hover {
   background: var(--bg-elevated-2);
+}
+
+.pcard__action {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: inherit;
 }
 
 .pcard__head {

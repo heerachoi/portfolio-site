@@ -1,29 +1,25 @@
 import { motion } from "framer-motion";
+import { easeOut } from "../motion";
 import "./ProjectCard.css";
 
-export default function ProjectCard({ project }) {
-  const isLink = Boolean(project.githubUrl);
-  const Card = isLink ? motion.a : motion.article;
-  const linkProps = isLink
-    ? {
-        href: project.githubUrl,
-        target: "_blank",
-        rel: "noopener noreferrer",
-        "aria-label": `${project.title} GitHub 저장소 열기`,
-      }
-    : {};
-
+export default function ProjectCard({ project, onSelect }) {
   return (
-    <Card
-      {...linkProps}
+    <motion.article
       layout
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -18 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.45, ease: easeOut }}
       whileHover={{ borderColor: "var(--brass)" }}
-      className={`pcard ${isLink ? "pcard--link" : ""}`}
+      className="pcard"
     >
+      <button
+        type="button"
+        className="pcard__action"
+        onClick={() => onSelect?.(project)}
+        aria-label={`${project.title} 상세 보기`}
+      />
+
       <div className="pcard__head">
         <span className="pcard__category">{project.category}</span>
         <span className="pcard__year">{project.year}</span>
@@ -49,8 +45,8 @@ export default function ProjectCard({ project }) {
             </span>
           ))}
         </div>
-        {isLink && <span className="pcard__github">GitHub에서 보기 →</span>}
+        <span className="pcard__github">자세히 보기 →</span>
       </div>
-    </Card>
+    </motion.article>
   );
 }

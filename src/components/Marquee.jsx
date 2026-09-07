@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import "./Marquee.css";
 
 const TOOLS = [
@@ -6,7 +6,6 @@ const TOOLS = [
   "CSS",
   "JavaScript",
   "React",
-  "TypeScript",
   "Firebase",
   "Redux",
   "Vercel",
@@ -17,14 +16,19 @@ const TOOLS = [
 ];
 
 export default function Marquee() {
+  const reduceMotion = useReducedMotion();
   const track = [...TOOLS, ...TOOLS];
 
   return (
     <div className="marquee" aria-hidden="true">
       <motion.div
         className="marquee__track"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+        animate={reduceMotion ? undefined : { x: ["0%", "-50%"] }}
+        transition={
+          reduceMotion
+            ? undefined
+            : { duration: 28, ease: "linear", repeat: Infinity }
+        }
       >
         {track.map((tool, i) => (
           <span className="marquee__item" key={`${tool}-${i}`}>

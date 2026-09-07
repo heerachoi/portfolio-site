@@ -1,6 +1,7 @@
 # 포트폴리오 사이트
 
-Figma / Web / Unreal Engine 작업을 한 곳에 보여주는 React + Framer Motion 포트폴리오입니다.
+React + Vite + Framer Motion으로 만든 프론트엔드 포트폴리오입니다.
+팀 프로젝트(SWIVEE, POPCORN), React 앱, 알고리즘 학습 기록과 Tistory 블로그 글을 한곳에서 보여줍니다.
 
 ## 시작하기
 
@@ -11,38 +12,40 @@ npm run dev
 
 `http://localhost:5173` 에서 확인할 수 있습니다.
 
-배포용 빌드:
-
 ```bash
-npm run build
+npm run build      # 배포용 빌드
+npm run preview    # 빌드 결과 미리보기
+npm run lint       # oxlint
+npm run sync:blog  # Tistory RSS → src/data/posts.js 갱신
 ```
-
-## 꼭 바꿔야 할 것
-
-1. **이름 / 이메일 / SNS 링크**
-   - `src/components/Nav.jsx` — 상단 로고
-   - `src/components/Hero.jsx` — 소개 문구
-   - `src/components/Contact.jsx` — 이메일, 링크드인, 깃허브, 아트스테이션 주소
-   - `src/components/Footer.jsx` — 저작권 표기
-
-2. **프로젝트 내용**
-   - `src/data/projects.js` 에서 실제 프로젝트로 교체하세요. `category`는 반드시 `Figma`, `Web`, `Unreal Engine` 중 하나여야 필터가 작동합니다. Unreal 프로젝트는 스크린샷이나 짧은 클립 링크를 추가하는 걸 추천합니다.
-
-3. **이력서**
-   - `public/resume.pdf` 파일을 추가하세요. 현재는 파일이 없어 다운로드 버튼이 404를 반환합니다.
 
 ## 구조
 
 ```
 src/
-  components/   각 섹션 (Nav, Hero, Marquee, Work, About, Contact, Footer)
-  data/         projects.js — 프로젝트 데이터
-  index.css     디자인 토큰 (색상, 타이포)
+  components/     섹션 단위 UI (Nav, Hero, Work, Blog…)
+  data/
+    site.js       이름·이메일·SNS·네비 (단일 설정)
+    projects.js   프로젝트·상세 케이스 스터디
+    posts.js      sync:blog로 생성되는 블로그 목록
+  motion.js       공통 모션 토큰
+  index.css       디자인 토큰 + 글로벌 스타일
+scripts/
+  sync-blog.mjs   블로그 RSS 동기화
 ```
+
+## 콘텐츠 수정
+
+1. **이름 / 연락처 / SNS** → `src/data/site.js`
+2. **프로젝트** → `src/data/projects.js`  
+   - `category`는 `전체` 필터를 제외하고 `프로젝트` | `React` | `Algorithm` 중 하나여야 합니다.
+   - 모달 상세는 `detail.sections[].blocks` (`paragraph` | `list` | `numbered` | `subsection`)로 구성합니다.
+   - 스크린샷이 있으면 `detail.image`에 public/assets 경로를 넣으면 모달에 표시됩니다.
+3. **블로그** → `npm run sync:blog`로 최신 글을 가져옵니다. 배포 전에 한 번 실행하는 것을 권장합니다.
 
 ## 디자인 메모
 
 - 컬러: 딥 네이비(`#12111a`) 배경 + 브라스 액센트(`#c9a15c`)
 - 타이포: 헤드라인 Space Grotesk / 본문 Inter
-- 모션: 히어로는 순차 등장 애니메이션, 이후 섹션은 스크롤 진입 시 1회 페이드업, 카드는 필터 전환 시 AnimatePresence로 교체됩니다.
-- `prefers-reduced-motion`을 존중하도록 처리되어 있습니다.
+- 모션: 히어로 스태거, 섹션 스크롤 페이드업, 카드 필터 `AnimatePresence`
+- `prefers-reduced-motion`은 CSS와 Framer Motion(`MotionConfig reducedMotion="user"`) 모두에서 존중합니다.

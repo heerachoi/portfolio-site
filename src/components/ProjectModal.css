@@ -1,0 +1,258 @@
+.pmodal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 40px);
+}
+
+.pmodal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: rgba(8, 7, 12, 0.72);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.pmodal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 100%);
+  max-height: min(88vh, 920px);
+  background: #0e0d14;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pmodal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: rgba(28, 26, 38, 0.9);
+  color: var(--ink);
+  font-size: 1.35rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.pmodal__close:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+}
+
+.pmodal__scroll {
+  overflow-y: auto;
+  padding: clamp(28px, 5vw, 48px);
+  padding-right: clamp(40px, 6vw, 56px);
+  overscroll-behavior: contain;
+}
+
+.pmodal__eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+
+.pmodal__title {
+  font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 28px;
+  padding-right: 28px;
+}
+
+.pmodal__hero {
+  margin-bottom: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-elevated);
+}
+
+.pmodal__hero img {
+  width: 100%;
+  height: auto;
+}
+
+.pmodal__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+}
+
+.pmodal__meta-row {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.pmodal__meta-row dt {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+  padding-top: 4px;
+}
+
+.pmodal__meta-row dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.pmodal__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pmodal__tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 5px 11px;
+  border-radius: 4px;
+  background: #ede9e2;
+  color: #16130c;
+}
+
+.pmodal__tag--pink {
+  background: #f3c4d1;
+  color: #4a2030;
+}
+
+.pmodal__tag--green {
+  background: #c8e6c4;
+  color: #1e3a1c;
+}
+
+.pmodal__links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pmodal__link {
+  color: #9ec4ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-all;
+  font-size: 0.92rem;
+  transition: color 0.2s ease;
+}
+
+.pmodal__link:hover {
+  color: #c5dbff;
+}
+
+.pmodal__divider {
+  height: 1px;
+  background: var(--line-strong);
+  margin: 32px 0;
+}
+
+.pmodal__section + .pmodal__section {
+  margin-top: 36px;
+}
+
+.pmodal__section-title {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+
+.pmodal__section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pmodal__p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--ink-dim);
+}
+
+.pmodal__list,
+.pmodal__numbered {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pmodal__list li,
+.pmodal__numbered li {
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: var(--ink-dim);
+}
+
+.pmodal__numbered {
+  list-style: none;
+  padding-left: 0;
+}
+
+.pmodal__numbered-label {
+  color: var(--brass);
+  font-weight: 600;
+}
+
+.pmodal__subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pmodal__subsection-title {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 4px 0 0;
+}
+
+@media (max-width: 560px) {
+  .pmodal {
+    padding: 0;
+    place-items: stretch;
+  }
+
+  .pmodal__panel {
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: 0;
+  }
+
+  .pmodal__meta-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .pmodal__scroll {
+    padding: 28px 20px 40px;
+  }
+}

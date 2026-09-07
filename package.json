@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "sync:blog": "node scripts/sync-blog.mjs"
+    "sync:blog": "node scripts/sync-blog.mjs",
+    "build:fresh": "npm run sync:blog && vite build"
   },
   "dependencies": {
     "framer-motion": "^13.1.1",
