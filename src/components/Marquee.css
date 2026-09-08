@@ -1,15 +1,24 @@
 .marquee {
+  position: relative;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   overflow: hidden;
   padding: 28px 0;
   background: var(--bg-elevated);
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
 }
 
 .marquee__track {
   display: flex;
   width: max-content;
   gap: 56px;
+  will-change: transform;
 }
 
 .marquee__item {
@@ -19,6 +28,7 @@
   white-space: nowrap;
   position: relative;
   padding-right: 56px;
+  cursor: default;
 }
 
 .marquee__item::after {

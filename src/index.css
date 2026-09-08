@@ -94,6 +94,25 @@ img {
   border-radius: 2px;
 }
 
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: 0;
+  z-index: 1000;
+  padding: 10px 16px;
+  background: var(--brass);
+  color: #16130c;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  transform: translateY(-120%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .container {
   width: 100%;
   max-width: var(--container);

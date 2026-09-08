@@ -4,9 +4,12 @@
   border-radius: 4px;
   padding: 28px;
   background: var(--bg-elevated);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  row-gap: 18px;
+  height: 100%;
+  align-self: stretch;
   transition: background 0.25s ease;
 }
 
@@ -24,6 +27,12 @@
   background: transparent;
   cursor: pointer;
   border-radius: inherit;
+}
+
+.pcard__top {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .pcard__head {
@@ -77,10 +86,10 @@
 .pcard__foot {
   border-top: 1px solid var(--line);
   padding-top: 16px;
-  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
 }
 
 .pcard__impact {
@@ -107,4 +116,23 @@
   font-size: 0.78rem;
   color: var(--teal);
   font-weight: 500;
+}
+
+/* Fallback when subgrid is unavailable: equal card height + push foot down */
+@supports not (grid-template-rows: subgrid) {
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    grid-row: auto;
+  }
+
+  .pcard__body {
+    flex: 1 1 auto;
+  }
+
+  .pcard__foot {
+    margin-top: auto;
+    align-self: stretch;
+  }
 }

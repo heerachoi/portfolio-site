@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { easeOut } from "../motion";
@@ -45,12 +45,13 @@ function Block({ block }) {
   }
 
   if (block.type === "numbered") {
+    const labels = ["첫째", "둘째", "셋째", "넷째", "다섯째"];
     return (
       <ol className="pmodal__numbered">
         {block.items.map((item, i) => (
           <li key={item}>
             <span className="pmodal__numbered-label">
-              {i === 0 ? "첫째" : i === 1 ? "둘째" : `${i + 1}.`}
+              {labels[i] ?? `${i + 1}.`}
             </span>{" "}
             {item}
           </li>
@@ -80,7 +81,12 @@ export default function ProjectModal({ project, onClose }) {
   const open = Boolean(project);
   const panelRef = useRef(null);
   const closeRef = useRef(null);
+  const scrollRef = useRef(null);
   const previousFocus = useRef(null);
+  const [scrollEdge, setScrollEdge] = useState({
+    top: false,
+    bottom: false,
+  });
 
   useEffect(() => {
     if (!open) return undefined;
@@ -128,6 +134,33 @@ export default function ProjectModal({ project, onClose }) {
     };
   }, [open, onClose]);
 
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const el = scrollRef.current;
+    if (!el) return undefined;
+
+    const update = () => {
+      const max = el.scrollHeight - el.clientHeight;
+      setScrollEdge({
+        top: el.scrollTop > 8,
+        bottom: max > 8 && el.scrollTop < max - 8,
+      });
+    };
+
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    if (el.firstElementChild) ro.observe(el.firstElementChild);
+
+    return () => {
+      el.removeEventListener("scroll", update);
+      ro.disconnect();
+      setScrollEdge({ top: false, bottom: false });
+    };
+  }, [open, project]);
+
   return createPortal(
     <AnimatePresence>
       {open && (
@@ -167,116 +200,142 @@ export default function ProjectModal({ project, onClose }) {
               ×
             </button>
 
-            <div className="pmodal__scroll">
-              <p className="pmodal__eyebrow">PROJECT</p>
-              <h2 id="pmodal-title" className="pmodal__title">
-                {detail?.fullTitle || project.title}
-              </h2>
+            <div
+              className={[
+                "pmodal__scroll-shell",
+                scrollEdge.top ? "is-scrolled" : "",
+                scrollEdge.bottom ? "has-more" : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              <div
+                className="pmodal__scroll-fade pmodal__scroll-fade--top"
+                aria-hidden="true"
+              />
+              <div
+                className="pmodal__scroll-fade pmodal__scroll-fade--bottom"
+                aria-hidden="true"
+              />
 
-              {detail?.image && (
-                <div className="pmodal__hero">
-                  <img src={detail.image} alt="" />
-                </div>
-              )}
+              <div ref={scrollRef} className="pmodal__scroll">
+                <div className="pmodal__scroll-inner">
+                  <p className="pmodal__eyebrow">프로젝트</p>
+                  <h2 id="pmodal-title" className="pmodal__title">
+                    {detail?.fullTitle || project.title}
+                  </h2>
 
-              {detail && (
-                <dl className="pmodal__meta">
-                  <div className="pmodal__meta-row">
-                    <dt>SKILLS</dt>
-                    <dd>
-                      <MetaTags items={detail.skills} />
-                    </dd>
-                  </div>
-                  <div className="pmodal__meta-row">
-                    <dt>TOOLS</dt>
-                    <dd>
-                      <MetaTags items={detail.tools} />
-                    </dd>
-                  </div>
-                  <div className="pmodal__meta-row">
-                    <dt>진행기간</dt>
-                    <dd>{detail.period}</dd>
-                  </div>
-                  <div className="pmodal__meta-row">
-                    <dt>개발인원</dt>
-                    <dd>{detail.team}</dd>
-                  </div>
-                  <div className="pmodal__meta-row">
-                    <dt>역할</dt>
-                    <dd>
-                      <MetaTags items={detail.roles} />
-                    </dd>
-                  </div>
-                  <div className="pmodal__meta-row">
-                    <dt>기여도</dt>
-                    <dd>{detail.contribution}</dd>
-                  </div>
-                  <div className="pmodal__meta-row">
-                    <dt>카테고리</dt>
-                    <dd>
-                      <MetaTags items={[detail.categoryLabel || project.category]} />
-                    </dd>
-                  </div>
-                  {(project.githubUrl || project.liveUrl) && (
-                    <div className="pmodal__meta-row">
-                      <dt>사이트</dt>
-                      <dd className="pmodal__links">
-                        {project.githubUrl && (
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="pmodal__link"
-                          >
-                            {project.githubUrl}
-                          </a>
-                        )}
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="pmodal__link"
-                          >
-                            {project.liveUrl}
-                          </a>
-                        )}
-                      </dd>
+                  {detail?.image && (
+                    <div className="pmodal__hero">
+                      <img
+                        src={detail.image}
+                        alt={`${detail.fullTitle || project.title} 스크린샷`}
+                      />
                     </div>
                   )}
-                </dl>
-              )}
 
-              <div className="pmodal__divider" />
-
-              {detail?.sections?.map((section) => (
-                <section key={section.title} className="pmodal__section">
-                  <h3 className="pmodal__section-title">{section.title}</h3>
-                  <div className="pmodal__section-body">
-                    {section.blocks.map((block, i) => (
-                      <Block key={`${section.title}-${i}`} block={block} />
-                    ))}
-                  </div>
-                </section>
-              ))}
-
-              {!detail && (
-                <section className="pmodal__section">
-                  <h3 className="pmodal__section-title">작품 설명</h3>
-                  <p className="pmodal__p">{project.problem}</p>
-                  <p className="pmodal__p">{project.solution}</p>
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="pmodal__link"
-                    >
-                      {project.githubUrl}
-                    </a>
+                  {detail && (
+                    <dl className="pmodal__meta">
+                      <div className="pmodal__meta-row">
+                        <dt>역량</dt>
+                        <dd>
+                          <MetaTags items={detail.skills} />
+                        </dd>
+                      </div>
+                      <div className="pmodal__meta-row">
+                        <dt>도구</dt>
+                        <dd>
+                          <MetaTags items={detail.tools} />
+                        </dd>
+                      </div>
+                      <div className="pmodal__meta-row">
+                        <dt>진행기간</dt>
+                        <dd>{detail.period}</dd>
+                      </div>
+                      <div className="pmodal__meta-row">
+                        <dt>개발인원</dt>
+                        <dd>{detail.team}</dd>
+                      </div>
+                      <div className="pmodal__meta-row">
+                        <dt>역할</dt>
+                        <dd>
+                          <MetaTags items={detail.roles} />
+                        </dd>
+                      </div>
+                      <div className="pmodal__meta-row">
+                        <dt>기여도</dt>
+                        <dd>{detail.contribution}</dd>
+                      </div>
+                      <div className="pmodal__meta-row">
+                        <dt>카테고리</dt>
+                        <dd>
+                          <MetaTags
+                            items={[detail.categoryLabel || project.category]}
+                          />
+                        </dd>
+                      </div>
+                      {(project.githubUrl || project.liveUrl) && (
+                        <div className="pmodal__meta-row">
+                          <dt>사이트</dt>
+                          <dd className="pmodal__links">
+                            {project.githubUrl && (
+                              <a
+                                href={project.githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="pmodal__link"
+                              >
+                                {project.githubUrl}
+                              </a>
+                            )}
+                            {project.liveUrl && (
+                              <a
+                                href={project.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="pmodal__link"
+                              >
+                                {project.liveUrl}
+                              </a>
+                            )}
+                          </dd>
+                        </div>
+                      )}
+                    </dl>
                   )}
-                </section>
-              )}
+
+                  <div className="pmodal__divider" />
+
+                  {detail?.sections?.map((section) => (
+                    <section key={section.title} className="pmodal__section">
+                      <h3 className="pmodal__section-title">{section.title}</h3>
+                      <div className="pmodal__section-body">
+                        {section.blocks.map((block, i) => (
+                          <Block key={`${section.title}-${i}`} block={block} />
+                        ))}
+                      </div>
+                    </section>
+                  ))}
+
+                  {!detail && (
+                    <section className="pmodal__section">
+                      <h3 className="pmodal__section-title">작품 설명</h3>
+                      <p className="pmodal__p">{project.problem}</p>
+                      <p className="pmodal__p">{project.solution}</p>
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="pmodal__link"
+                        >
+                          {project.githubUrl}
+                        </a>
+                      )}
+                    </section>
+                  )}
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>

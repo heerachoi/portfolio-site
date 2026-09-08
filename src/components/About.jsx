@@ -1,46 +1,25 @@
+import { site } from "../data/site";
 import { easeOut } from "../motion";
 import FadeIn from "./FadeIn";
 import "./About.css";
 
-const STEPS = [
-  {
-    n: "01",
-    title: "설계한다",
-    body: "Adobe XD·Illustrator로 화면 흐름과 UI를 먼저 그리고, 사용자가 실제로 경험할 인터랙션을 검증합니다.",
-  },
-  {
-    n: "02",
-    title: "구현한다",
-    body: "Vanilla JS·React로 웹 앱을 만들고, Redux와 Firebase로 상태·데이터를 연결합니다.",
-  },
-  {
-    n: "03",
-    title: "배포한다",
-    body: "Vercel·Firebase로 실서비스를 배포하고, GitHub로 팀 협업과 코드 리뷰를 이어갑니다.",
-  },
-];
-
 export default function About() {
+  const { about } = site;
+
   return (
     <section id="about" className="about section">
       <div className="container about__grid">
         <FadeIn>
-          <h2 className="about__title">소개</h2>
-          <p className="about__body">
-            디자인과 개발을 함께 다루는 웹 개발자입니다. NoteSquare에서 KOTI
-            자율주행 시범운행지구 평가 시스템 프론트엔드를 담당했고, SWIVEE·POPCORN
-            등 팀 프로젝트부터 바닐라 JavaScript SPA·React 앱까지 웹 서비스를
-            구현해 왔습니다.
-          </p>
-          <p className="about__body">
-            백준·LeetCode 문제 풀이로 알고리즘 기초를 꾸준히 다지고, GitHub로
-            학습과 프로젝트 기록을 쌓아왔습니다. 사용자 경험을 고민하는
-            프론트엔드 개발자로 성장하고 있습니다.
-          </p>
+          <h2 className="about__title">{about.title}</h2>
+          {about.paragraphs.map((paragraph, index) => (
+            <p key={index} className="about__body">
+              {paragraph}
+            </p>
+          ))}
         </FadeIn>
 
         <div className="about__steps">
-          {STEPS.map((step, i) => (
+          {about.steps.map((step, i) => (
             <FadeIn
               key={step.n}
               className="about__step"

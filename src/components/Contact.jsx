@@ -7,11 +7,11 @@ export default function Contact() {
     <section id="contact" className="contact section">
       <div className="container">
         <FadeIn className="contact__inner">
-          <p className="contact__kicker">함께 일해요</p>
+          <p className="contact__kicker">{site.contact.kicker}</p>
           <h2 className="contact__title">
-            새 프로젝트나 협업에
+            {site.contact.titleLines[0]}
             <br />
-            관심이 있으시면 연락해 주세요
+            {site.contact.titleLines[1]}
           </h2>
 
           <a href={`mailto:${site.email}`} className="contact__mail">

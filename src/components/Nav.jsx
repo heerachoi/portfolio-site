@@ -3,15 +3,65 @@ import { useEffect, useId, useState } from "react";
 import { site } from "../data/site";
 import "./Nav.css";
 
+const sectionIds = site.nav.map((link) => link.href.slice(1));
+
 export default function Nav() {
   const { scrollY } = useScroll();
   const [solid, setSolid] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState("");
   const menuId = useId();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setSolid(latest > 40);
   });
+
+  useEffect(() => {
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (!sections.length) return undefined;
+
+    const visible = new Map();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            visible.set(entry.target.id, entry.intersectionRatio);
+          } else {
+            visible.delete(entry.target.id);
+          }
+        }
+
+        if (!visible.size) {
+          if (window.scrollY < 120) setActiveHref("");
+          return;
+        }
+
+        let bestId = "";
+        let bestRatio = 0;
+        for (const id of sectionIds) {
+          const ratio = visible.get(id) ?? 0;
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        }
+
+        if (bestId) setActiveHref(`#${bestId}`);
+      },
+      {
+        rootMargin: "-20% 0px -55% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    for (const section of sections) observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return undefined;
@@ -42,17 +92,18 @@ export default function Nav() {
 
         <nav className="nav__links" aria-label="주요 섹션">
           {site.nav.map((link) => (
-            <a key={link.href} href={link.href} className="nav__link">
+            <a
+              key={link.href}
+              href={link.href}
+              className={`nav__link${activeHref === link.href ? " is-active" : ""}`}
+              aria-current={activeHref === link.href ? "location" : undefined}
+            >
               {link.label}
             </a>
           ))}
         </nav>
 
         <div className="nav__right">
-          <span className="nav__status">
-            <span className="nav__status-dot" />
-            {site.status}
-          </span>
           <motion.a
             href={site.github.href}
             target="_blank"
@@ -95,7 +146,8 @@ export default function Nav() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="nav__mobile-link"
+                  className={`nav__mobile-link${activeHref === link.href ? " is-active" : ""}`}
+                  aria-current={activeHref === link.href ? "location" : undefined}
                   onClick={closeMenu}
                 >
                   {link.label}

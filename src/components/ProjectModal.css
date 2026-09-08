@@ -23,7 +23,7 @@
   z-index: 1;
   width: min(760px, 100%);
   max-height: min(88vh, 920px);
-  background: #0e0d14;
+  background: var(--bg);
   border: 1px solid var(--line-strong);
   border-radius: 10px;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
@@ -36,7 +36,7 @@
   position: absolute;
   top: 14px;
   right: 14px;
-  z-index: 2;
+  z-index: 4;
   width: 36px;
   height: 36px;
   border: 1px solid var(--line-strong);
@@ -55,11 +55,106 @@
   color: var(--brass);
 }
 
+.pmodal__scroll-shell {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .pmodal__scroll {
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: clamp(28px, 5vw, 48px);
-  padding-right: clamp(40px, 6vw, 56px);
+  padding-right: clamp(36px, 5vw, 48px);
   overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 161, 92, 0.55) transparent;
+}
+
+.pmodal__scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.pmodal__scroll::-webkit-scrollbar-track {
+  margin: 14px 0;
+  background: transparent;
+  border-radius: 999px;
+}
+
+.pmodal__scroll::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(201, 161, 92, 0.35),
+      rgba(201, 161, 92, 0.72) 45%,
+      rgba(201, 161, 92, 0.4)
+    );
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+  min-height: 48px;
+  transition: background 0.2s ease;
+}
+
+.pmodal__scroll::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(201, 161, 92, 0.55),
+      rgba(201, 161, 92, 0.92) 50%,
+      rgba(201, 161, 92, 0.55)
+    );
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.pmodal__scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.pmodal__scroll-inner {
+  padding-bottom: 8px;
+}
+
+.pmodal__scroll-fade {
+  position: absolute;
+  left: 0;
+  right: 10px;
+  height: 56px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.pmodal__scroll-fade--top {
+  top: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 13, 20, 0.96) 0%,
+    rgba(14, 13, 20, 0.72) 42%,
+    transparent 100%
+  );
+}
+
+.pmodal__scroll-fade--bottom {
+  bottom: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(14, 13, 20, 0.98) 0%,
+    rgba(14, 13, 20, 0.7) 48%,
+    transparent 100%
+  );
+}
+
+.pmodal__scroll-shell.is-scrolled .pmodal__scroll-fade--top,
+.pmodal__scroll-shell.has-more .pmodal__scroll-fade--bottom {
+  opacity: 1;
 }
 
 .pmodal__eyebrow {
@@ -253,6 +348,12 @@
   }
 
   .pmodal__scroll {
-    padding: 28px 20px 40px;
+    padding: 28px 18px 40px;
+    padding-right: 22px;
+  }
+
+  .pmodal__scroll-fade {
+    right: 8px;
+    height: 44px;
   }
 }

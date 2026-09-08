@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { blogUrl, posts } from "../data/posts";
+import { posts } from "../data/posts";
+import { site } from "../data/site";
 import { easeOut } from "../motion";
 import FadeIn from "./FadeIn";
 import "./Blog.css";
@@ -22,7 +23,7 @@ export default function Blog() {
             </p>
           </div>
           <motion.a
-            href={blogUrl}
+            href={site.blog.href}
             target="_blank"
             rel="noopener noreferrer"
             className="blog__all"

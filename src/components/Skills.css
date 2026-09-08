@@ -1,0 +1,118 @@
+.skills {
+  border-top: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 0%, rgba(111, 168, 160, 0.07), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 90% 100%, rgba(201, 161, 92, 0.06), transparent 50%),
+    var(--bg);
+}
+
+.skills__head {
+  max-width: 520px;
+  margin-bottom: 56px;
+}
+
+.skills__eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 12px;
+}
+
+.skills__title {
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  margin-bottom: 14px;
+}
+
+.skills__sub {
+  font-size: 1rem;
+  color: var(--ink-dim);
+  line-height: 1.6;
+}
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 64px;
+}
+
+.skills__category-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 14px;
+  row-gap: 14px;
+  align-items: baseline;
+  margin-bottom: 28px;
+}
+
+.skills__category-index {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  color: var(--brass);
+  letter-spacing: 0.04em;
+}
+
+.skills__category-title {
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.skills__category-line {
+  grid-column: 1 / -1;
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--brass) 0%,
+    var(--line-strong) 28%,
+    var(--line) 100%
+  );
+  opacity: 0.85;
+}
+
+.skills__levels {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.skills__level-title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-faint);
+  margin: 0 0 12px;
+}
+
+.skills__tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills__tag {
+  font-size: 0.88rem;
+  color: var(--ink-dim);
+  border: 1px solid var(--line-strong);
+  padding: 8px 16px;
+  border-radius: 100px;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.skills__tag:hover {
+  color: var(--ink);
+  border-color: var(--brass);
+  background: var(--brass-soft);
+}
+
+@media (min-width: 800px) {
+  .skills__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+  }
+}

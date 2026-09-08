@@ -3,9 +3,11 @@ import { easeOut } from "../motion";
 import "./ProjectCard.css";
 
 export default function ProjectCard({ project, onSelect }) {
+  const titleId = `project-title-${project.id}`;
+
   return (
     <motion.article
-      layout
+      layout="position"
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -18 }}
@@ -17,16 +19,20 @@ export default function ProjectCard({ project, onSelect }) {
         type="button"
         className="pcard__action"
         onClick={() => onSelect?.(project)}
-        aria-label={`${project.title} 상세 보기`}
+        aria-labelledby={titleId}
       />
 
-      <div className="pcard__head">
-        <span className="pcard__category">{project.category}</span>
-        <span className="pcard__year">{project.year}</span>
-      </div>
+      <div className="pcard__top">
+        <div className="pcard__head">
+          <span className="pcard__category">{project.category}</span>
+          <span className="pcard__year">{project.year}</span>
+        </div>
 
-      <h3 className="pcard__title">{project.title}</h3>
-      <p className="pcard__role">{project.role}</p>
+        <h3 id={titleId} className="pcard__title">
+          {project.title}
+        </h3>
+        <p className="pcard__role">{project.role}</p>
+      </div>
 
       <div className="pcard__body">
         <p className="pcard__label">과제</p>
@@ -45,7 +51,9 @@ export default function ProjectCard({ project, onSelect }) {
             </span>
           ))}
         </div>
-        <span className="pcard__github">자세히 보기 →</span>
+        <span className="pcard__github" aria-hidden="true">
+          자세히 보기 →
+        </span>
       </div>
     </motion.article>
   );

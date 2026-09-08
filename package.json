@@ -1,7 +1,8 @@
 {
-  "name": "portfolio",
+  "name": "portfolio-site",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "homepage": "https://heerachoi.github.io/portfolio-site/",
   "type": "module",
   "scripts": {
     "dev": "vite",

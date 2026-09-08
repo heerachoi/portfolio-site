@@ -20,41 +20,47 @@ const item = {
 };
 
 export default function Hero() {
+  const { hero } = site;
+
   return (
     <section id="top" className="hero">
       <div className="container hero__inner">
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.p variants={item} className="hero__kicker">
-            웹 개발 · UI 디자인 · React
+            {hero.kicker}
           </motion.p>
 
           <motion.h1 variants={item} className="hero__title">
-            화면을 설계하고
+            {hero.titleLines[0]}
             <br />
-            코드로 구현하는
+            {hero.titleLines[1]}
             <br />
-            웹 개발자 {site.name}
+            {hero.titleLines[2]} {site.name}
           </motion.h1>
 
           <motion.p variants={item} className="hero__lede">
-            HTML·CSS·JavaScript로 웹의 기반을 다지고, React로 인터랙티브한 앱을
-            만들었습니다. Illustrator·Adobe XD로 사용자 경험을 먼저 그리고,
-            Firebase와 Vercel로 실서비스까지 연결하는 프로젝트를 팀과 함께
-            진행해왔습니다.
+            {hero.lede}
           </motion.p>
 
           <motion.div variants={item} className="hero__actions">
-            <a href="#work" className="btn btn--primary">
-              작업 살펴보기
-            </a>
-            <a
+            <motion.a
+              href={hero.primaryCta.href}
+              className="btn btn--primary"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {hero.primaryCta.label}
+            </motion.a>
+            <motion.a
               href={site.github.href}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn--ghost"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              GitHub 방문
-            </a>
+              {hero.secondaryCta.label}
+            </motion.a>
           </motion.div>
         </motion.div>
       </div>
@@ -65,7 +71,12 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}
       >
-        <span className="hero__scroll-line" />
+        <motion.span
+          className="hero__scroll-line"
+          animate={{ scaleX: [0.55, 1, 0.55], opacity: [0.45, 1, 0.45] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          style={{ transformOrigin: "left" }}
+        />
         스크롤
       </motion.div>
     </section>
