@@ -18,9 +18,6 @@ export default function Blog() {
         <FadeIn className="blog__head">
           <div>
             <h2 className="blog__title">글</h2>
-            <p className="blog__sub">
-              React·Three.js·성능 개선 등, CODESIGN에 기록한 최근 글
-            </p>
           </div>
           <motion.a
             href={site.blog.href}

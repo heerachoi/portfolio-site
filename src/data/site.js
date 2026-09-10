@@ -1,7 +1,7 @@
 /** Site-wide identity, copy & links — single source of truth */
 
 export const site = {
-  name: "최희라",
+  name: "HEERA_CHOI",
   title: "Web Developer",
   email: "heera7722@gmail.com",
   url: "https://heerachoi.github.io/portfolio-site/",
