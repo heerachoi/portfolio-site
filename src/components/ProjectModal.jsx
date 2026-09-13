@@ -274,9 +274,11 @@ export default function ProjectModal({ project, onClose }) {
                           />
                         </dd>
                       </div>
-                      {(project.githubUrl || project.liveUrl) && (
+                      {(project.githubUrl ||
+                        project.githubPrivate ||
+                        project.liveUrl) && (
                         <div className="pmodal__meta-row">
-                          <dt>사이트</dt>
+                          <dt>링크</dt>
                           <dd className="pmodal__links">
                             {project.githubUrl && (
                               <a
@@ -285,8 +287,13 @@ export default function ProjectModal({ project, onClose }) {
                                 rel="noopener noreferrer"
                                 className="pmodal__link"
                               >
-                                {project.githubUrl}
+                                GitHub 바로가기
                               </a>
+                            )}
+                            {!project.githubUrl && project.githubPrivate && (
+                              <span className="pmodal__link-muted">
+                                GitHub (비공개)
+                              </span>
                             )}
                             {project.liveUrl && (
                               <a
@@ -295,7 +302,7 @@ export default function ProjectModal({ project, onClose }) {
                                 rel="noopener noreferrer"
                                 className="pmodal__link"
                               >
-                                {project.liveUrl}
+                                사이트 바로가기
                               </a>
                             )}
                           </dd>
@@ -329,7 +336,22 @@ export default function ProjectModal({ project, onClose }) {
                           rel="noopener noreferrer"
                           className="pmodal__link"
                         >
-                          {project.githubUrl}
+                          GitHub 바로가기
+                        </a>
+                      )}
+                      {!project.githubUrl && project.githubPrivate && (
+                        <span className="pmodal__link-muted">
+                          GitHub (비공개)
+                        </span>
+                      )}
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="pmodal__link"
+                        >
+                          사이트 바로가기
                         </a>
                       )}
                     </section>

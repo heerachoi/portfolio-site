@@ -11,7 +11,7 @@ export const project = {
     solution:
       "React·Vite 기반으로 성과보고서 작성, 다단계 평가 워크플로, PDF·HWPX 산출물까지 한 서비스로 구현했습니다.",
     impact: "실서비스 운영 · 프론트엔드 핵심 기여 (비공개)",
-    githubUrl: "https://github.com/notesquare/koti-autozone-frontend-app",
+    githubPrivate: true,
     detail: {
       fullTitle: "KOTI Autozone · 자율주행 시범운행지구 평가 시스템",
       skills: [

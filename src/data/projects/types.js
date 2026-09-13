@@ -36,7 +36,8 @@
  * @property {string} problem
  * @property {string} solution
  * @property {string} impact
- * @property {string} [githubUrl]
+ * @property {string} [githubUrl] Public repo only — omit when private
+ * @property {boolean} [githubPrivate] When true, show non-clickable "GitHub (비공개)"
  * @property {string} [liveUrl]
  * @property {ProjectDetail} [detail]
  */

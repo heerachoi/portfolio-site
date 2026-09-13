@@ -11,7 +11,7 @@ export const project = {
     solution:
       "React·Apollo GraphQL·Ant Design으로 타임시트·사건관리·직원/권한·통계 UI를 구현하고 권한에 따라 화면을 분기했습니다.",
     impact: "실서비스 운영 · 프론트엔드 핵심 기여 (비공개)",
-    githubUrl: "https://github.com/notesquare/yk-timetracking-frontend",
+    githubPrivate: true,
     detail: {
       fullTitle: "YK 시간기록 · 사건·타임시트 관리 시스템",
       skills: [

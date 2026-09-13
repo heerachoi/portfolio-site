@@ -11,7 +11,7 @@ export const project = {
     solution:
       "Next.js App Router와 Strapi·Meilisearch를 연동하고, static export 후 Cloudflare Workers로 배포하는 프론트엔드를 구현했습니다.",
     impact: "실서비스 운영 · UI·검색·홈 인터랙션 기여",
-    githubUrl: "https://github.com/notesquare/maeil-homepage-frontend",
+    githubPrivate: true,
     liveUrl: "https://lawmaeil.com/",
     detail: {
       fullTitle: "매일 법률사무소 · 기업 홈페이지 프론트엔드",

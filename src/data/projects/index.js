@@ -5,8 +5,6 @@ import { project as swivee } from "./swivee.js";
 import { project as popcorn } from "./popcorn.js";
 import { project as saveduck } from "./saveduck.js";
 import { project as inclusiveHealth } from "./inclusive-health.js";
-import { project as todoReduxTs } from "./todo-redux-ts.js";
-import { project as todoTs } from "./todo-ts.js";
 import { project as websocketChatting } from "./websocket-chatting.js";
 import { project as baekjoonJs } from "./baekjoon-js.js";
 
@@ -22,8 +20,6 @@ export const projects = [
   popcorn,
   saveduck,
   inclusiveHealth,
-  todoReduxTs,
-  todoTs,
   websocketChatting,
   baekjoonJs,
 ];
