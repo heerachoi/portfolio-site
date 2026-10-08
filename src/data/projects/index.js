@@ -14,8 +14,8 @@ export const categories = ["전체", "프로젝트", "React", "Algorithm"];
 /** @type {import('./types.js').Project[]} */
 export const projects = [
   kotiAutozone,
-  maeilHomepage,
   ykTimetracking,
+  maeilHomepage,
   swivee,
   popcorn,
   saveduck,

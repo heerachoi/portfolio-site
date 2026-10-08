@@ -3,15 +3,16 @@ export const project = {
     id: "koti-autozone",
     title: "KOTI Autozone",
     category: "프로젝트",
-    year: "2025–26",
-    role: "프론트엔드 · NoteSquare",
+    year: "2024–",
+    role: "개발 · UI/UX · NoteSquare",
     tools: ["React", "Vite", "Ant Design", "GraphQL", "Paged.js"],
     problem:
       "자율주행 시범운행지구 운영성과를 지자체·평가자·관리자가 단계별로 입력·평가·집계할 웹 시스템이 필요했습니다.",
     solution:
       "React·Vite 기반으로 성과보고서 작성, 다단계 평가 워크플로, PDF·HWPX 산출물까지 한 서비스로 구현했습니다.",
-    impact: "실서비스 운영 · 프론트엔드 핵심 기여 (비공개)",
+    impact: "실서비스 운영 · 개발 · UI/UX 담당",
     githubPrivate: true,
+    liveUrl: "https://avzone.koti.re.kr/",
     detail: {
       fullTitle: "KOTI Autozone · 자율주행 시범운행지구 평가 시스템",
       skills: [
@@ -31,13 +32,13 @@ export const project = {
         "Paged.js",
         "React Router",
       ],
-      period: "2025.01 – 2026.09",
-      team: "NoteSquare (프론트엔드 중심)",
+      period: "2024.10 – 진행 중",
+      team: "NoteSquare",
       roles: [
         { label: "개발", tone: "green" },
-        { label: "UI", tone: "pink" },
+        { label: "UI/UX", tone: "pink" },
       ],
-      contribution: "프론트엔드 핵심 기능·워크플로·산출물",
+      contribution: "개발 · UI/UX 담당",
       categoryLabel: "회사 프로젝트",
       sections: [
         {
@@ -45,7 +46,7 @@ export const project = {
           blocks: [
             {
               type: "paragraph",
-              text: "KOTI Autozone은 한국교통연구원(KOTI) 자율주행 시범운행지구 운영성과를 지자체·평가자·관리자·관찰자 역할에 맞춰 입력·평가·집계하는 웹 프론트엔드입니다. NoteSquare에서 React·Vite·Ant Design·Apollo GraphQL로 구축했으며, 저장소는 회사 정책상 비공개입니다.",
+              text: "KOTI Autozone은 한국교통연구원(KOTI) 자율주행 시범운행지구 운영성과를 지자체·평가자·관리자·관찰자 역할에 맞춰 입력·평가·집계하는 웹 프론트엔드입니다. NoteSquare에서 개발과 UI/UX를 담당해 React·Vite·Ant Design·Apollo GraphQL로 구축했으며, 저장소는 회사 정책상 비공개입니다.",
             },
             {
               type: "paragraph",

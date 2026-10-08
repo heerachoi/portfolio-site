@@ -4,13 +4,13 @@ export const project = {
     title: "YK 시간기록",
     category: "프로젝트",
     year: "2024",
-    role: "프론트엔드 · NoteSquare",
+    role: "개발 · UI/UX · NoteSquare",
     tools: ["React", "Apollo GraphQL", "Ant Design", "Styled Components"],
     problem:
       "법률·자문 업무에서 사건별 타임시트 작성, 위임·배당, 직원 권한, 통계까지 한 웹에서 다뤄야 했습니다.",
     solution:
       "React·Apollo GraphQL·Ant Design으로 타임시트·사건관리·직원/권한·통계 UI를 구현하고 권한에 따라 화면을 분기했습니다.",
-    impact: "실서비스 운영 · 프론트엔드 핵심 기여 (비공개)",
+    impact: "실서비스 운영 · 개발 · UI/UX 담당",
     githubPrivate: true,
     detail: {
       fullTitle: "YK 시간기록 · 사건·타임시트 관리 시스템",
@@ -33,12 +33,12 @@ export const project = {
         "dnd-kit",
       ],
       period: "2024.01 – 2024.09",
-      team: "NoteSquare (프론트엔드 중심)",
+      team: "NoteSquare",
       roles: [
         { label: "개발", tone: "green" },
-        { label: "UI", tone: "pink" },
+        { label: "UI/UX", tone: "pink" },
       ],
-      contribution: "타임시트·사건관리·권한·쿼리 개선 핵심 기여",
+      contribution: "개발 · UI/UX 담당",
       categoryLabel: "회사 프로젝트",
       sections: [
         {
@@ -46,7 +46,7 @@ export const project = {
           blocks: [
             {
               type: "paragraph",
-              text: "YK 시간기록은 법률·자문 업무의 사건(CASE)·자문·기타 단위로 타임시트를 작성·조회하고, 담당자 위임·배당과 직원 권한·부서·직급, 통계·엑셀까지 다루는 웹 프론트엔드입니다. NoteSquare에서 React·Apollo GraphQL·Ant Design으로 구축했으며, 저장소는 회사 정책상 비공개입니다.",
+              text: "YK 시간기록은 법률·자문 업무의 사건(CASE)·자문·기타 단위로 타임시트를 작성·조회하고, 담당자 위임·배당과 직원 권한·부서·직급, 통계·엑셀까지 다루는 웹 프론트엔드입니다. NoteSquare에서 개발과 UI/UX를 담당해 React·Apollo GraphQL·Ant Design으로 구축했으며, 저장소는 회사 정책상 비공개입니다.",
             },
             {
               type: "paragraph",
